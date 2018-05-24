@@ -1,4 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native';
+
+const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
   container: {
@@ -7,8 +10,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     backgroundColor: '$primaryBlue'
   },
-  text: {
-    fontSize: 30,
-    color: '$primaryGray',
+  logo: {
+    width: imageWidth
   }
 });

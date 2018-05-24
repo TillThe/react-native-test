@@ -1,16 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 import { Asset, AppLoading, Font } from 'expo';
+
 import { appLoaded } from '../actions/index';
 import { Loader } from './Loader/index';
+import Auth from '../screens/Auth';
 
-
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '$white',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -31,7 +34,7 @@ const loadAssets = async () => {
   await new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
-    }, 3000);
+    }, 300);
   });
   console.log('after load Font');
 };
@@ -44,9 +47,7 @@ const Main = ({app, appLoaded}) => {
     console.log('in app loaded');
     return (
       <View style={styles.container}>
-        <Text style={{ fontFamily: 'ProximaNovaBold' }}>Open upp App.jssss to starttt working on your app!</Text>
-        <Text>Open upp App.jssss to starttt working on your app!</Text>
-        <Text>Shake yper menu.</Text>
+        <Auth />
       </View>
     );
   }

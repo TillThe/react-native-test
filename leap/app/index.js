@@ -15,6 +15,10 @@ import { appLoaded } from './actions/index';
 EStyleSheet.build({
   $primaryBlue: '#45678f',
   $primaryGray: '#eef1f2',
+  $white: '#ffffff',
+  $defaultFont: 'ProximaNova',
+  $defaultFontBold: 'ProximaNovaBold',
+  $defaultFontBlack: 'ProximaNovaBlack'
 });
 
 const store = createStore({});

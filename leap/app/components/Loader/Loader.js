@@ -5,11 +5,13 @@ import { AppLoading } from 'expo';
 
 import styles from './styles';
 
+import { Logo } from '../Logo/index';
+
 export default class Loader extends AppLoading {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Loading...</Text>
+        <Logo style={styles.logo} />
       </View>
     );
   }
