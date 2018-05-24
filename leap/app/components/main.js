@@ -8,12 +8,15 @@ import { Asset, AppLoading, Font } from 'expo';
 
 import { appLoaded } from '../actions/index';
 import { Loader } from './Loader/index';
+
 import Auth from '../screens/Auth';
+import Home from '../screens/Home';
+
 
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '$white',
+    backgroundColor: '$primaryBlue',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -40,14 +43,14 @@ const loadAssets = async () => {
 };
 
 
-const Main = ({app, appLoaded}) => {
+const Main = ({ app, appLoaded }) => {
   console.log('app in main: ', app);
 
   if (app.loaded) {
     console.log('in app loaded');
     return (
       <View style={styles.container}>
-        <Auth />
+        <Home />
       </View>
     );
   }

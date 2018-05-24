@@ -1,25 +1,30 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StatusBar, KeyboardAvoidingView, TouchableOpacity, Text, View, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import PropTypes from 'prop-types';
 
 import { Logo } from '../components/Logo/index';
 import { TextFieldWithIcon } from '../components/TextField/index';
 
-const screenWidth = Dimensions.get('window').width,
-  inputWidth = (screenWidth / 2) + 20;
+import { userAuthorized } from '../actions/index';
+
+import userData from '../data/user';
+
+const windowSize = Dimensions.get('window'),
+  inputWidth = (windowSize.width / 2) + 20;
 
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: screenWidth,
+    width: windowSize.width,
     backgroundColor: '$primaryBlue',
   },
   image: {
-    height: 100,
+    width: windowSize.width / 2 - 40,
+    height: windowSize.height / 3,
     marginBottom: 10
   },
   input: {
@@ -46,13 +51,20 @@ const styles = EStyleSheet.create({
 
 const maxCharAmount = 32;
 
+const isUserExist = ({login, password}) => {
+  // TODO: real query
+  return userData.find((item) => item.login === login && item.password === password);
+};
+
 class Auth extends Component {
   static propTypes = {
-
+    userAuthorized: PropTypes.func
   };
 
   constructor(props) {
     super(props);
+
+    this.userAuthorized = props.userAuthorized;
 
     this.state = {
       loginText: '',
@@ -61,30 +73,49 @@ class Auth extends Component {
   }
 
   handleButtonPress() {
-    
+    const user = isUserExist({
+      login: this.state.loginText,
+      password: this.state.passwordText
+    });
+
+    if (user) {
+      console.log('auth ok');
+      this.loginInput.clear();
+      this.setState({
+        loginText: ''
+      });
+
+      this.userAuthorized({
+        authorized: true,
+        login: user.login
+      });
+    }
+
+    this.passwordInput.clear();
+    this.setState({
+      passwordText: ''
+    });
   }
 
   handleLoginChange(text) {
     this.setState({
       loginText: text
     });
-    console.log(this.state.loginText);
   }
   
   handlePasswordChange(text) {
     this.setState({
       passwordText: text
     });
-    console.log(this.state.loginText, this.state.passwordText);
   }
 
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Image resizeMode='contain' style={styles.image} source={require('../../assets/img/auth-man.png')} />
-        <TextFieldWithIcon onChangeText={(text) => this.handleLoginChange(text)} isPassword={false} placeholder='username' maxLength={maxCharAmount} />
-        <TextFieldWithIcon onChangeText={(text) => this.handlePasswordChange(text)} isPassword={true} placeholder='password' maxLength={maxCharAmount} />
-        <TouchableOpacity style={styles.btn} onPress={this.handleButtonPress}>
+        <TextFieldWithIcon customRef={input => { this.loginInput = input }} onChangeText={(text) => this.handleLoginChange(text)} isPassword={false} placeholder='username' maxLength={maxCharAmount} />
+        <TextFieldWithIcon customRef={input => { this.passwordInput = input }} onChangeText={(text) => this.handlePasswordChange(text)} isPassword={true} placeholder='password' maxLength={maxCharAmount} />
+        <TouchableOpacity style={styles.btn} onPress={() => this.handleButtonPress()}>
           <Text style={styles.btnText}>LOGIN</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -98,9 +129,9 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 const mapDispatchToProps = (dispatch) => ({
-  // appLoaded(loaded) {
-  //   dispatch(appLoaded(loaded))
-  // }
+  userAuthorized(authorized) {
+    dispatch(userAuthorized(authorized))
+  }
 });
 
 export default connect(

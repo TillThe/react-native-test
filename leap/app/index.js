@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import { View, Text, AppState, AsyncStorage } from 'react-native';
+import { View, Text, AppState, AsyncStorage, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SecureStore } from 'expo';
 
 import PropTypes from 'prop-types';
 
 import Main from './components/main';
-import Loader from './components/Loader/index';
+import { Loader } from './components/Loader/index';
 
 import createStore from './config/store';
 import { appLoaded } from './actions/index';
 
+const windowSize = Dimensions.get('window');
+
 EStyleSheet.build({
   $primaryBlue: '#45678f',
+  $primaryOrange: '#D57A66',
+  $primaryGreen: '#00BD9D',
+  $primaryPurple: '#9E768F',
   $primaryGray: '#eef1f2',
+  $lightGray: '#F0F0F0',
+  $heavyGray: '#8a8a8a',
   $white: '#ffffff',
+
   $defaultFont: 'ProximaNova',
   $defaultFontBold: 'ProximaNovaBold',
-  $defaultFontBlack: 'ProximaNovaBlack'
+  $defaultFontHeavy: 'ProximaNovaBlack',
+
+  $border: '#E2E2E2',
+  $inputText: '#797979',
+  $darkText: '#343434',
+
+  $defaultWidth: windowSize.width,
+
 });
 
 const store = createStore({});
@@ -84,9 +99,7 @@ class App extends Component {
   render() {
     if (!this.state.isStoreLoaded) {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Loading...</Text>
-        </View>
+        <Loader />
       );
     }
 

@@ -1,1 +1,2 @@
 export const APP_LOADED = 'APP_LOADED';
+export const USER_AUTHORIZED = 'USER_AUTHORIZED';

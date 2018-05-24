@@ -7,29 +7,27 @@ const screenWidth = Dimensions.get('window').width,
 export default EStyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: inputWidth,
     height: 50,
     marginBottom: 10,
-    paddingLeft: 5,
-    paddingRight: 30,
     borderRadius: 20,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: '$white',
   },
   image: {
     width: 15,
-    marginLeft: 50
+    marginLeft: 10
   },
   input: {
-    width: inputWidth,
+    width: inputWidth - 25,
     height: 50,
+    marginLeft: 'auto',
     paddingVertical: 10,
     paddingHorizontal: 10,
-    paddingLeft: 10,
     paddingRight: 25,
     fontSize: 18,
     fontFamily: '$defaultFont',
-    color: '$primaryGray'
+    color: '$heavyGray'
   }
 });

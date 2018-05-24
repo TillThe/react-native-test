@@ -9,12 +9,13 @@ const TextFieldWithIcon = (props) => {
     imageUrl = isPassword ? require('./img/lock.png') : require('./img/user.png'),
     secureText = isPassword ? true : false,
     style = props.style,
-    onPress = props.onPress;
+    onPress = props.onPress,
+    link = props.customRef;
 
   return (
     <View style={styles.container}>
       <Image style={styles.image} resizeMode='contain' source={imageUrl} />
-      <TextInput style={styles.input} onPress={onPress} secureTextEntry={secureText} {...props} underlineColorAndroid="transparent" />
+      <TextInput ref={link} style={styles.input} onPress={onPress} secureTextEntry={secureText} {...props} underlineColorAndroid="transparent" />
     </View>
   );
 };
