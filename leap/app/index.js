@@ -16,6 +16,7 @@ const windowSize = Dimensions.get('window');
 
 EStyleSheet.build({
   $primaryBlue: '#45678f',
+  $lightBlue: '#b0c8e4',
   $primaryOrange: '#D57A66',
   $primaryGreen: '#00BD9D',
   $primaryPurple: '#9E768F',
@@ -32,7 +33,10 @@ EStyleSheet.build({
   $inputText: '#797979',
   $darkText: '#343434',
 
-  $defaultWidth: windowSize.width,
+  $screenWidth: windowSize.width,
+  $defaultWidth: windowSize.width - 20,
+  $screenHeight: windowSize.height,
+  $defaultRadius: 5
 
 });
 

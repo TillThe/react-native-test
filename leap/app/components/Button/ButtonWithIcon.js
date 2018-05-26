@@ -7,21 +7,60 @@ import styles from './styles';
 const ButtonWithIcon = (props) => {
   const text = props.text,
     onPress = props.onPress,
-    icon = props.icon;
-  let imageUrl = icon === 'plus' ? require(`./img/plus.png`) : require('./img/drop.png');
+    icon = props.icon,
+    containerStyle = props.containerStyle ? props.containerStyle : styles.container,
+    imageStyle = props.imageStyle ? props.imageStyle : styles.image,
+    textStyle = props.textStyle ? props.textStyle : styles.text;
+  let imageUrl = require(`./img/plus.png`);
+
+  switch (icon) {
+    case 'plus':
+      imageUrl = require(`./img/plus.png`);
+      break;
+    case 'drop':
+      imageUrl = require(`./img/drop.png`);
+      break;
+    case 'star':
+      imageUrl = require(`./img/star.png`);
+      break;
+    case 'star-full':
+      imageUrl = require(`./img/star-full.png`);
+      break;
+    case 'loader':
+      imageUrl = require(`./img/loader.png`);
+      break;
+    case 'check':
+      imageUrl = require(`./img/check.png`);
+      break;
+    case 'dots':
+      imageUrl = require(`./img/dots.svg`);
+      break;
+    case 'home':
+      imageUrl = require(`./img/home.svg`);
+      break;
+    case 'date':
+      imageUrl = require('./img/calendar.png');
+      break;
+    case 'clock':
+      imageUrl = require('./img/clock.png');
+      break;
+  }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.text}>{text}</Text>
-      <Image style={styles.image} resizeMode='contain' source={imageUrl} />
+    <TouchableOpacity style={containerStyle} onPress={onPress}>
+      {text ? <Text style={textStyle}>{text}</Text> : null}
+      <Image style={imageStyle} resizeMode='contain' source={imageUrl} />
     </TouchableOpacity>
   );
 };
 
 ButtonWithIcon.propTypes = {
   text: PropTypes.string,
-  src: PropTypes.string,
-  onPress: PropTypes.func
+  icon: PropTypes.string,
+  onPress: PropTypes.func,
+  containerStyle: PropTypes.number,
+  imageStyle: PropTypes.number,
+  textStyle: PropTypes.number
 };
 
 export default ButtonWithIcon;

@@ -17,8 +17,8 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: windowSize.width,
-    marginTop: 30,
+    width: '$screenWidth',
+    paddingTop: 50,
     backgroundColor: '$white'
   }
 });
@@ -72,7 +72,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
   app: state.app,
-  user: state.user
+  user: state.user,
+  charts: state.chart
 });
 const mapDispatchToProps = (dispatch) => ({
   userAuthorized(authorized) {

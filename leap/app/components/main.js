@@ -11,6 +11,7 @@ import { Loader } from './Loader/index';
 
 import Auth from '../screens/Auth';
 import Home from '../screens/Home';
+import Chart from '../screens/Chart';
 
 
 const styles = EStyleSheet.create({
@@ -50,7 +51,7 @@ const Main = ({ app, appLoaded }) => {
     console.log('in app loaded');
     return (
       <View style={styles.container}>
-        <Home />
+        <Chart />
       </View>
     );
   }

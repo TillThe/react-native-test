@@ -5,7 +5,7 @@ import styles from './styles';
 
 const EmptyItem = () => (
   <View style={styles.row}>
-    <Text style={styles.text}>Добавьте графики в избранное</Text>
+    <Text style={styles.textWhenEmpty}>Добавьте графики в избранное</Text>
   </View>
 );
 

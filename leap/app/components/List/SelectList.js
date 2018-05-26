@@ -2,34 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
 
-import ListItem from './item';
+import SimpleItem from './simpleItem';
 import Separator from './separator';
 import EmptyItem from './empty.item';
 
 import styles from './styles';
 
-const ChartList = ({ data, onSelect, onAdd }) => (
+const SelectList = ({ data, onSelect }) => (
   <FlatList
+    style={styles.container}
     data={data}
     keyExtractor={(item) => item.id}
-    itemSeparatorComponent={Separator}
+    ItemSeparatorComponent={Separator}
     ListEmptyComponent={EmptyItem}
     renderItem={({item}) => (
-      <ListItem
+      <SimpleItem
+        itemData={item}
         text={item.name}
-        loaded={item.loaded}
-        favorite={item.favorite}
+        selected={item.selected}
         onSelect={onSelect}
-        onAdd={onAdd}
       />
     )}
   />
 );
 
-ChartList.propTypes = {
+SelectList.propTypes = {
   data: PropTypes.array,
-  onSelect: PropTypes.func,
-  onAdd: PropTypes.func
+  onSelect: PropTypes.func
 };
 
-export default ChartList;
+export default SelectList;
