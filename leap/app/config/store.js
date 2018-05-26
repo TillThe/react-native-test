@@ -3,7 +3,7 @@ import logger from 'redux-logger';
 
 import PropTypes from 'prop-types';
 
-import allReducers from '../reducers';
+import allReducers from '../reducers/index';
 import appReducer from '../reducers/app';
 import userReducer from '../reducers/user';
 
@@ -17,8 +17,8 @@ if (process.env.NODE_ENV === 'development') {
 const createCustomStore = ({ appStore, userStore }) => {
   const reducers = combineReducers({
     ...allReducers,
-    app: (appStore, state) => appReducer(appStore, state),
-    user: (userStore, state) => userReducer(userStore, state)
+    // app: (appStor, state) => appReducer(appStor = appStore, state),
+    user: (userStor, state) => userReducer(userStor = userStore, state)
   });
 
   return createStore(reducers, applyMiddleware(...middleware));

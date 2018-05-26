@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Asset, AppLoading, Font } from 'expo';
 
+import Navigator from '../config/routes';
+
 import { appLoaded } from '../actions/index';
 import { Loader } from './Loader/index';
 
@@ -50,9 +52,7 @@ const Main = ({ app, appLoaded }) => {
   if (app.loaded) {
     console.log('in app loaded');
     return (
-      <View style={styles.container}>
-        <Chart />
-      </View>
+        <Navigator />
     );
   }
 
@@ -61,8 +61,7 @@ const Main = ({ app, appLoaded }) => {
     <Loader startAsync={loadAssets}
       onFinish={() => appLoaded(true)}
       onError={console.warn}
-      >
-    </Loader>
+    />
   );
 };
 

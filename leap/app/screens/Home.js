@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, KeyboardAvoidingView, TouchableOpacity, Text, View, Image, Dimensions } from 'react-native';
+import { StatusBar, KeyboardAvoidingView, TouchableOpacity, Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import { Logo } from '../components/Logo';
 import { ButtonWithIcon } from '../components/Button';
 import { ChartList } from '../components/List';
+import { Loader } from '../components/Loader';
 
-import chartData from '../data/favorite.chart.list';
+import { getConfig, getChartList } from '../service/chart';
 
-const windowSize = Dimensions.get('window');
 
 const styles = EStyleSheet.create({
   container: {
@@ -32,10 +32,22 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
+    this.user = this.props.user;
+    this.app = this.props.app;
+    this.charts = this.props.charts;
+
+    console.log('Home: user: ', this.user, 'app: ', this.app, 'charts: ', this.charts);
 
     this.state = {
 
     };
+  }
+
+  async getChartData() {
+    const menu = await getConfig(),
+      chartList = await getChartList();
+
+    
   }
   
   handlePressCreate() {
@@ -55,11 +67,26 @@ class Home extends Component {
   }
 
   render() {
+    const app = this.props.app;
+
+    console.log('configLoaded: ', app.configLoaded);
+    if (!app.configLoaded) {
+      return (
+        <Loader startAsync={loadAssets}
+          onFinish={() => appLoaded(true)}
+          onError={console.warn}
+        />
+      );
+    }
+
+    const { navigation } = this.props;
+
+    console.log(navigation, navigation.state.params);
 
     return (
       <View style={styles.container}>
-        <ButtonWithIcon text='Новый график' icon='plus' onPress={() => this.handlePressCreate()}/>
-        <ButtonWithIcon text='Избранные графики' icon='drop' onPress={() => this.handlePressList()}/>
+        <ButtonWithIcon text='Новый график' icon='plus' onPress={() => this.handlePressCreate()} />
+        <ButtonWithIcon text='Избранные графики' icon='drop' onPress={() => this.handlePressList()} />
         <ChartList
           data={chartData}
           onSelect={(item) => this.handleListItemSelect(item)}

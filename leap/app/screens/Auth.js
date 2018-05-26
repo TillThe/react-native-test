@@ -19,16 +19,21 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: windowSize.width,
+    width: '$screenWidth',
     backgroundColor: '$primaryBlue',
+    overflow: 'hidden'
+  },
+  limiter: {
+    width: '$screenWidth',
+    height: StatusBar.currentHeight,
+    '@media android': {
+      height: StatusBar.currentHeight * 3
+    }
   },
   image: {
     width: windowSize.width / 2 - 40,
     height: windowSize.height / 3,
     marginBottom: 10
-  },
-  input: {
-
   },
   btn: {
     width: inputWidth,
@@ -64,12 +69,27 @@ class Auth extends Component {
   constructor(props) {
     super(props);
 
-    this.userAuthorized = props.userAuthorized;
+    this.user = this.props.user;
+    this.userAuthorized = this.props.userAuthorized;
+
+    if (this.user && this.user.authorized) {
+      this.goToHome();
+    }
 
     this.state = {
       loginText: '',
       passwordText: ''
     };
+  }
+
+  componentDidMount() {
+    console.log('user before', this.user);
+    this.user = this.props.user;
+    console.log('user after', this.user);
+  }
+
+  goToHome() {
+    this.props.navigation.navigate('Home');
   }
 
   handleButtonPress() {
@@ -79,7 +99,6 @@ class Auth extends Component {
     });
 
     if (user) {
-      console.log('auth ok');
       this.loginInput.clear();
       this.setState({
         loginText: ''
@@ -89,6 +108,8 @@ class Auth extends Component {
         authorized: true,
         login: user.login
       });
+
+      this.goToHome();
     }
 
     this.passwordInput.clear();
@@ -111,11 +132,12 @@ class Auth extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView style={styles.container} behavior='padding'>
+        <View style={styles.limiter} />
         <Image resizeMode='contain' style={styles.image} source={require('../../assets/img/auth-man.png')} />
         <TextFieldWithIcon customRef={input => { this.loginInput = input }} onChangeText={(text) => this.handleLoginChange(text)} isPassword={false} placeholder='username' maxLength={maxCharAmount} />
         <TextFieldWithIcon customRef={input => { this.passwordInput = input }} onChangeText={(text) => this.handlePasswordChange(text)} isPassword={true} placeholder='password' maxLength={maxCharAmount} />
-        <TouchableOpacity style={styles.btn} onPress={() => this.handleButtonPress()}>
+        <TouchableOpacity style={styles.btn} onPress={this.handleButtonPress.bind(this)}>
           <Text style={styles.btnText}>LOGIN</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -125,7 +147,6 @@ class Auth extends Component {
 };
 
 const mapStateToProps = (state) => ({
-  app: state.app,
   user: state.user
 });
 const mapDispatchToProps = (dispatch) => ({

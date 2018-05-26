@@ -23,7 +23,7 @@ class DateModal extends Modal {
   constructor(props) {
     super(props);
 
-    const { 
+    const {
       onDateChange = () => {}, 
       onClose = () => {}, 
       minDate, 

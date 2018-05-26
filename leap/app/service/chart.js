@@ -1,3 +1,5 @@
+import chartData from '../data/favorite.chart.list';
+
 export const idList = [];
 
 export const getID = (min = 0, max = 100) => {
@@ -12,4 +14,8 @@ export const getID = (min = 0, max = 100) => {
 
   idList.push(id);
   return id;
+};
+
+export const getChartList = async () => {
+  return { ...chartData };
 };

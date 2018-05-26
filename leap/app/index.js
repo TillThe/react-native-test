@@ -70,9 +70,13 @@ class App extends Component {
       
       appStore = JSON.parse(appStore);
       userStore = JSON.parse(userStore);
+      console.log('stores: ', appStore, userStore);
 
       if (typeof appStore === 'object' && typeof userStore === 'object') {
-        this.setState({ store: createStore({ appStore, userStore }) });
+        const st = createStore({ userStore });
+        console.log(st.getState());
+
+        this.setState({ store: st });
       }
     } catch (e) {
       console.warn('Local store can not be loaded');
@@ -90,6 +94,7 @@ class App extends Component {
   async handleAppStateChange(currentAppState) {
     const state = this.state.store.getState();
 
+    console.log('AppStateChange: ', AppState.currentState, state);
     try {
       // AsyncStorage.setItem('appStore', JSON.stringify(state.app));
       // AsyncStorage.setItem('userStore', JSON.stringify(state.user));

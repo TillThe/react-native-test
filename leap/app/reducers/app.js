@@ -1,7 +1,12 @@
-import { APP_LOADED } from '../actions/action.types';
+import { APP_LOADED, CONFIG_LOADED } from '../actions/action.types';
+import menu from '../data/menu';
 
 const initialStore = {
-  loaded: false
+  loaded: false,
+  configLoaded: false,
+  config: {
+    ...menu
+  }
 };
 
 export default (state = initialStore, action = {}) => {
@@ -10,6 +15,12 @@ export default (state = initialStore, action = {}) => {
       return {
         ...state,
         loaded: action.loaded
+      };
+    case CONFIG_LOADED:
+      return {
+        ...state,
+        configLoaded: action.configLoaded,
+        config: action.config
       };
 
 		default:

@@ -1,15 +1,18 @@
-import { CHART_NEW, CHART_FAVORITE, CHART_LOADED, CHART_SELECTED } from '../actions/action.types';
+import { CHART_NEW, CHART_FAVORITE, CHART_LOADED, CHART_SELECTED, CHARTS_LOADED } from '../actions/action.types';
 
 const initialStore = [];
 
 export default (state = initialStore, action = {}) => {
   const i = state.find((x) => x.id === action.id);
 
-  if (i === -1 && action.type !== CHART_NEW) return state;
+  if (i === -1 && action.type !== CHART_NEW && action.type !== CHARTS_LOADED) return state;
 
   const newState = [].concat(state);
 
 	switch (action.type) {
+    case CHARTS_LOADED:
+      return [].concat(action.charts);
+
     case CHART_FAVORITE:
       newState[i].favorite = action.favorite;
 
