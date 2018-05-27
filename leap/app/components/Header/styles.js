@@ -1,29 +1,69 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { StatusBar } from 'react-native';
 
 export default EStyleSheet.create({
   container: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
-    height: 40,
-    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '$screenWidth',
+    height: 40 + StatusBar.currentHeight,
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: '$primaryBlue',
     zIndex: 10
   },
   imageContainer: {
-    height: '100%',
-    width: 35,
+    height: 40,
+    width: 30,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 0,
-    marginLeft: 15,
-    borderWidth: 1
+    marginRight: 5,
+    backgroundColor: '$primaryBlue'
   },
   image: {
-    width: 30
+    width: 20
+  },
+  backImageContainer: {
+    width: 35
+  },
+  loaderImageContainer: {
+    marginLeft: 'auto'
+  },
+  dotsImageContainer: {
+    marginRight: 0,
+    marginLeft: 16
+  },
+  headerTextContainer: {
+    flex: 0,
+    justifyContent: 'center',
+    width: '$screenWidth' - 240,
+    height: 40,
+    marginRight: 5,
+    overflow: 'hidden'
+  },
+  headerText: {
+    color: '$white',
+    fontSize: 13,
+    fontFamily: '$defaultFontBold',
+    zIndex: -1
+  },
+
+  homeContainer: {
+    justifyContent: 'space-between',
+  },
+  homeImageContainer: {
+    justifyContent: 'flex-end',
+    marginRight: 30
+  },
+  logoContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 95,
+    height: 30
+  },
+  logo: {
+    width: 95,
+    height: 30
   }
 });

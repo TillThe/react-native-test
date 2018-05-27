@@ -90,7 +90,6 @@ class DateModal extends Modal {
 
     return (
       <Modal
-        isOpen={true}
         onClosed={() => this.onClose()}
         style={[styles.modal, styles.modalDate]}
         position={"center"}

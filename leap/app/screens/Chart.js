@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import { ButtonWithIcon } from '../components/Button';
-import { Header } from '../components/Header';
+import { ChartHeader, HomeHeader } from '../components/Header';
 import DateModal from '../components/Modal/DateModal';
 import StepModal from '../components/Modal/StepModal';
 
@@ -21,7 +21,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '$screenWidth',
-    marginTop: 30,
+    // backgroundColor: '$primaryBlue',
     backgroundColor: '#dfeeff',
   },
   dateStepContainer: {
@@ -30,7 +30,6 @@ const styles = EStyleSheet.create({
     justifyContent: 'space-between',
     width: '$screenWidth',
     height: 50,
-    marginTop: 40,
     backgroundColor: '#80abde'
   },
   dateContainer: {
@@ -206,7 +205,10 @@ class Chart extends Component {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#d3d3d3" barStyle="light-content" />
-        <Header />
+        {/* <ChartHeader 
+          title='Просмотры по Котовасинску'
+        /> */}
+        <HomeHeader />
         <View style={styles.dateStepContainer}>
           <ButtonWithIcon
             icon='date'

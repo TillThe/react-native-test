@@ -33,10 +33,13 @@ const ButtonWithIcon = (props) => {
       imageUrl = require(`./img/check.png`);
       break;
     case 'dots':
-      imageUrl = require(`./img/dots.svg`);
+      imageUrl = require(`./img/dots.png`);
       break;
     case 'home':
-      imageUrl = require(`./img/home.svg`);
+      imageUrl = require(`./img/home.png`);
+      break;
+    case 'back':
+      imageUrl = require(`./img/left-arrow.png`);
       break;
     case 'date':
       imageUrl = require('./img/calendar.png');
@@ -58,8 +61,6 @@ ButtonWithIcon.propTypes = {
   text: PropTypes.string,
   icon: PropTypes.string,
   onPress: PropTypes.func,
-  containerStyle: PropTypes.number,
-  imageStyle: PropTypes.number,
   textStyle: PropTypes.number
 };
 
