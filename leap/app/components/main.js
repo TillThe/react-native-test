@@ -52,7 +52,8 @@ const Main = ({ app, appLoaded }) => {
   if (app.loaded) {
     console.log('in app loaded');
     return (
-        <Navigator />
+        // <Navigator />
+        <Chart />
     );
   }
 

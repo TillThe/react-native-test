@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import Modal from 'react-native-modalbox';
 import CalendarPicker from 'react-native-calendar-picker';
 
+import { SelectList } from '../List';
+
 import styles from './styles';
 
 class StepModal extends Modal {
@@ -21,10 +23,10 @@ class StepModal extends Modal {
     const {
       onStepSelect = () => {},
       onClose = () => {},
-      stepList = []
+      data = []
     } = props;
 
-    this.stepList = stepList;
+    this.data = data;
 
     this.onStepSelect = onStepSelect;
     this.onClose = onClose;
@@ -54,7 +56,13 @@ class StepModal extends Modal {
         backdropContent={BContent}
         ref={this.modal}
         {...this.props}>
-        <Text style={styles.text}>Step modal</Text>
+        <View style={styles.listStepContainer}>
+            <SelectList
+              data={this.data}
+              onSelect={this.onStepSelect.bind(this)}
+              itemStyle={styles.listItem}
+            />
+          </View>
       </Modal>
     );
   }

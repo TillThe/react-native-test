@@ -11,9 +11,14 @@ export default EStyleSheet.create({
     backgroundColor: 'gray'
   },
   modalStep: {
-    // backgroundColor: 
+    justifyContent: 'center',
+    height: 160,
+    paddingVertical: 10,
+    backgroundColor: '$white'
   },
   modalDate: {
+    height: 510,
+    paddingVertical: 10,
     backgroundColor: '$white'
   },
   btn: {
@@ -28,15 +33,32 @@ export default EStyleSheet.create({
     right: 0,
     width: 50,
     height: 50,
-    backgroundColor: "transparent"
+    backgroundColor: 'transparent'
   },
   text: {
     color: "black",
     fontSize: 22
   },
 
-  listContainer: {
-    height: 140,
+  listDateContainer: {
+    height: 200,
+  },
+  listStepContainer: {
+    height: 160,
+    justifyContent: 'center'
+  },
+  listItem: {
+    height: 35,
+    paddingVertical: 10,
+    borderRadius: 0,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textHeader: {
     marginTop: 5,
+    marginBottom: 2,
+    fontFamily: '$defaultFontBold',
+    fontSize: 16
   }
 });

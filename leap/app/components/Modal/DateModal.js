@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
 
+import moment from 'moment';
 import Modal from 'react-native-modalbox';
 import CalendarPicker from 'react-native-calendar-picker';
 
@@ -17,19 +18,21 @@ class DateModal extends Modal {
     minDate: PropTypes.object,
     maxDate: PropTypes.object,
     startDate: PropTypes.object,
-    endDate: PropTypes.object
+    endDate: PropTypes.object,
+    data: PropTypes.array
   };
 
   constructor(props) {
     super(props);
 
     const {
-      onDateChange = () => {}, 
-      onClose = () => {}, 
-      minDate, 
-      maxDate, 
-      startDate, 
-      endDate 
+      onDateChange = () => {},
+      onClose = () => {},
+      minDate,
+      maxDate,
+      startDate,
+      endDate,
+      data
     } = props;
 
     this.minDate = minDate ? minDate.toString() : '';
@@ -40,7 +43,13 @@ class DateModal extends Modal {
     this.onDateChange = onDateChange;
     this.onClose = onClose;
 
+    this.data = data ? data : [];
+
     this.modal = React.createRef();
+
+    this.state = {
+      startDate
+    };
   }
 
   openModal() {
@@ -54,6 +63,25 @@ class DateModal extends Modal {
   handleDateChange(date, type) {
     console.log('date: ', date, 'type: ', type);
 
+    if (type === undefined) {
+
+      this.onDateChange({
+        startDate: moment().add(-date.value, 'd'),
+        endDate: moment()
+      });
+
+    } else if (type === 'END_DATE') {
+
+      this.onDateChange({
+        startDate: this.state.startDate,
+        endDate: date
+      });
+
+    } else {
+
+      this.setState({ startDate: date });
+
+    }
   }
 
   render() {
@@ -70,12 +98,14 @@ class DateModal extends Modal {
         backdropContent={BContent}
         ref={this.modal}
         {...this.props}>
-          <View style={styles.listContainer}>
+          <View style={styles.listDateContainer}>
             <SelectList
-              data={[]}
-              onSelect={this.handleDateChange.bind(this)}  
+              data={this.data}
+              onSelect={this.handleDateChange.bind(this)}
+              itemStyle={styles.listItem}
             />
           </View>
+          <Text style={styles.textHeader}>Свой период</Text>
           <CalendarPicker
             startFromMonday={true}
             allowRangeSelection={true}

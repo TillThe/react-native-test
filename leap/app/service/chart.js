@@ -17,5 +17,5 @@ export const getID = (min = 0, max = 100) => {
 };
 
 export const getChartList = async () => {
-  return { ...chartData };
+  return [].concat(chartData);
 };

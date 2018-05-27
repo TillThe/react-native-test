@@ -1,9 +1,9 @@
-import { CHART_NEW, CHART_FAVORITE, CHART_LOADED, CHART_SELECTED, CHARTS_LOADED } from '../actions/action.types';
+import { CHARTS_LOADED, CHART_LOADED, CHART_NEW, CHART_FAVORITE, CHART_SELECTED, SELECT_PERIOD, SELECT_STEP } from '../actions/action.types';
 
 const initialStore = [];
 
 export default (state = initialStore, action = {}) => {
-  const i = state.find((x) => x.id === action.id);
+  const i = state.indexOf(state.find((x) => x.id === action.id));
 
   if (i === -1 && action.type !== CHART_NEW && action.type !== CHARTS_LOADED) return state;
 
@@ -37,6 +37,17 @@ export default (state = initialStore, action = {}) => {
       newState.push(...action);
       delete newState[newState.length - 1].type;
 
+      return newState;
+
+    case SELECT_PERIOD:
+      newState[i].startDate = action.startDate;
+      newState[i].endDate = action.endDate;
+
+      return newState;
+
+    case SELECT_STEP:
+      newState[i].step = action.step;
+      
       return newState;
 
 		default:

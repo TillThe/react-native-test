@@ -8,19 +8,19 @@ import EmptyItem from './empty.item';
 
 import styles from './styles';
 
-const SelectList = ({ data, onSelect }) => (
+const SelectList = ({ data, onSelect, itemStyle }) => (
   <FlatList
     style={styles.container}
     data={data}
-    keyExtractor={(item) => item.id}
+    keyExtractor={(item) => item.id || item.title}
     ItemSeparatorComponent={Separator}
-    ListEmptyComponent={EmptyItem}
     renderItem={({item}) => (
       <SimpleItem
         itemData={item}
-        text={item.name}
-        selected={item.selected}
+        text={item.name || item.title}
+        selected={item.selected || item.default}
         onSelect={onSelect}
+        style={itemStyle ? itemStyle : null}
       />
     )}
   />

@@ -8,7 +8,6 @@ export default EStyleSheet.create({
     marginTop: 5,
     marginBottom: 10,
     borderRadius: '$defaultRadius',
-    backgroundColor: '$lightGray',
   },
   row: {
     flexDirection: 'row',
@@ -22,7 +21,7 @@ export default EStyleSheet.create({
     width: '$defaultWidth' - 50,
     marginLeft: 10,
     color: '$primaryBlue',
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: '$defaultFont'
   },
   textWhenEmpty: {

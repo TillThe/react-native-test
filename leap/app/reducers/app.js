@@ -5,7 +5,7 @@ const initialStore = {
   loaded: false,
   configLoaded: false,
   config: {
-    ...menu
+    
   }
 };
 
